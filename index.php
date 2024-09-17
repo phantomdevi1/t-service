@@ -13,7 +13,7 @@
     </div>
     <div class="header_index-block">
     <header class="header_index">
-        <a href="">новости</a>
+        <a href="news.php">новости</a>
         <a href="">авторизация</a>
     </header>    
     <hr class="header_index_hr">
@@ -41,13 +41,14 @@
             </div>
         </div>
 
-        <form action="" class="form_backcall">
-            <p>остались вопросы?</p>
-            <input class="backcall_input" type="number" name="number_phone" placeholder="номер телефона">
-            <input class="backcall_input" type="text" name="name_callback" placeholder="имя">
-            <input class="backcall_input" type="text" name="mail_callback" placeholder="e-mail">
-            <input class="callback_btn" type="submit" name="callback_input" value="заказать звонок">
-        </form>
+    <form action="submit_callback.php" method="POST" class="form_backcall">
+        <p>остались вопросы?</p>
+        <input class="backcall_input" type="number" name="number_phone" placeholder="номер телефона" required>
+        <input class="backcall_input" type="text" name="name_callback" placeholder="имя" required>
+        <input class="backcall_input" type="email" name="mail_callback" placeholder="e-mail" required>
+        <input class="callback_btn" type="submit" name="callback_input" value="заказать звонок">
+    </form>
+
     </div>
 </body>
 </html>
