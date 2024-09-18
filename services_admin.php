@@ -11,7 +11,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 include 'config.php';
 
 // Получаем запросы на звонок
-$sql = "SELECT * FROM call_requests ORDER BY created_at DESC";
+$sql = "SELECT * FROM service_bookings ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 $conn->close();
@@ -22,19 +22,19 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Запросы на звонок</title>
+    <title>запись на сервис</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/favicon.svg" type="image/x-icon">
 </head>
 <body>
-    <header class="header_page">
+<header class="header_page">
         <a href="admin_dashboard.php" class="header_page-first_href">главная</a>
         <img src="img/logo_header.png" alt="">
         <a href="logout.php" class="header_page-second_href">выйти</a>
     </header>
 
     <div class="content">
-        <p class="title_page">запросы на звонок</p>
+        <p class="title_page">запись на сервис</p>
 
         <?php if ($result->num_rows > 0): ?>
             <table class="call_requests_table">
@@ -49,16 +49,16 @@ $conn->close();
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
-                            <td><?= htmlspecialchars($row['name']) ?></td>
-                            <td><?= htmlspecialchars($row['phone']) ?></td>
-                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['user_id']) ?></td>
+                            <td><?= htmlspecialchars($row['service_id']) ?></td>
+                            <td><?= htmlspecialchars($row['appointment_date']) ?></td>
                             <td><?= htmlspecialchars($row['created_at']) ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
         <?php else: ?>
-            <p>Записи отсутвуют.</p>
+            <p>Нет запросов на звонок.</p>
         <?php endif; ?>
     </div>
 </body>

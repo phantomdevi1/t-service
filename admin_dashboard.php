@@ -23,7 +23,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     </header>
     <div class="admin_panel_block">
         <div class="cart_admin_panel"><a href="new_news.php"><img src="img/news_card.png" alt=""></a></div>
-        <div class="cart_admin_panel"><a href=""><img src="img/order_card.png" alt=""></a></div>
+        <div class="cart_admin_panel"><a href="services_admin.php"><img src="img/order_card.png" alt=""></a></div>
         <div class="cart_admin_panel"><a href="callback_admin.php"><img src="img/call_card.png" alt=""></a></div>
     </div>
 </body>
