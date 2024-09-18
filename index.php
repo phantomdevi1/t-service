@@ -14,7 +14,7 @@
     <div class="header_index-block">
     <header class="header_index">
         <a href="news.php">новости</a>
-        <a href="">авторизация</a>
+        <a href="auth.php">авторизация</a>
     </header>    
     <hr class="header_index_hr">
 </div>

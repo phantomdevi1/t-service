@@ -263,3 +263,47 @@ body{
     text-align: center;
     margin-bottom: 20px;
 }
+
+/* auth */
+.auth_block{
+    margin-top: 150px;
+    width: 40%;
+    height: 400px;
+    background-color: #AAB396;
+    border-radius: 10px;
+    display: grid;
+}
+.auth_block form{
+    width: 100%;
+    display: grid;
+}
+.auth_block p{
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+}
+.login_auth, 
+.password_auth{
+    width: 50%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    padding: 5px;
+}
+.submit_auth{
+    width: 50%;
+    background-color: #674636;
+    height: 50px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.submit_auth:hover{
+    background-color: #422d23;
+}
