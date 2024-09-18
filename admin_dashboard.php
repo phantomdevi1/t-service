@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-// Проверяем, авторизован ли пользователь и является ли он администратором
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header('Location: auth.php'); // Если нет, перенаправляем на страницу авторизации
+    header('Location: auth.php'); 
     exit();
 }
 ?>
@@ -13,9 +12,19 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админ панель</title>
+    <title>панель администратора</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/favicon.svg" type="image/x-icon">
 </head>
 <body>
-    <h1>Добро пожаловать в админ панель</h1>
+    <header class="header_page">
+        <img src="img/logo_header.png" alt="">
+        <a href="logout.php" class="header_page-second_href">выйти</a>
+    </header>
+    <div class="admin_panel_block">
+        <div class="cart_admin_panel"><a href="new_news.php"><img src="img/news_card.png" alt=""></a></div>
+        <div class="cart_admin_panel"><a href=""><img src="img/order_card.png" alt=""></a></div>
+        <div class="cart_admin_panel"><a href="callback_admin.php"><img src="img/call_card.png" alt=""></a></div>
+    </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ $result = $conn->query($sql);
     <header class="header_page">
         <a href="index.php" class="header_page-first_href">главная</a>
         <img src="img/logo_header.png" alt="">
-        <a href="" class="header_page-second_href">авторизация</a>
+        <a href="auth.php" class="header_page-second_href">авторизация</a>
     </header>
     <div class="content">
         <p class="title_page">новости</p>
