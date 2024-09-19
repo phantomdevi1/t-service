@@ -393,3 +393,23 @@ body{
 .call_requests_table tr:hover {
     background-color: #ddd;
 }
+
+/* client_dashboard */
+.order_service_block{
+    text-align: center;
+    margin-top: 50px;
+    background-color: #AAB396;
+    width: 50%;
+    color: #fff;
+    border-radius: 10px;
+    display: grid;
+}
+.title_service_block{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+.services_block{
+    display: grid;
+    margin-top: 30px;
+}
