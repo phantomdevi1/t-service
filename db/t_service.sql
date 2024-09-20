@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `t_service`
+-- База данных: `sfchizhmai`
 --
 
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE `call_requests` (
   `phone` varchar(20) NOT NULL,
   `email` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=;
+) ;
 
 --
 -- Дамп данных таблицы `call_requests`
@@ -54,7 +54,7 @@ CREATE TABLE `news` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `published_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=;
+) ;
 
 --
 -- Дамп данных таблицы `news`
@@ -80,7 +80,7 @@ CREATE TABLE `services` (
   `name` varchar(255) NOT NULL,
   `description` text,
   `price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=;
+) ;
 
 --
 -- Дамп данных таблицы `services`
@@ -118,7 +118,7 @@ CREATE TABLE `service_bookings` (
   `service_id` int DEFAULT NULL,
   `appointment_date` timestamp NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=;
+) ;
 
 --
 -- Дамп данных таблицы `service_bookings`
@@ -141,7 +141,7 @@ INSERT INTO `service_bookings` (`id`, `user_id`, `service_id`, `appointment_date
 CREATE TABLE `service_categories` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=;
+) ;
 
 --
 -- Дамп данных таблицы `service_categories`
@@ -168,7 +168,7 @@ CREATE TABLE `users` (
   `phone` varchar(20) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','client') DEFAULT 'client'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=;
+) ;
 
 --
 -- Дамп данных таблицы `users`
