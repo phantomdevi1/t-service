@@ -1,25 +1,25 @@
 <?php
 session_start();
 
-// Проверка авторизации клиента
+
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'client') {
     header('Location: auth.php');
     exit();
 }
 
-// Подключение к базе данных
+
 include 'config.php';
 
 $success_message = '';
 $error_message = '';
 
-// Обработка записи на услугу
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST['appointment_date'])) {
     $user_id = $_SESSION['user_id'];
     $service_id = intval($_POST['service_id']);
     $appointment_date = $_POST['appointment_date'];
 
-    // Проверяем, свободна ли дата
+    
     $check_sql = "SELECT COUNT(*) AS cnt FROM service_bookings WHERE service_id = ? AND appointment_date = ?";
     $stmt = $conn->prepare($check_sql);
     $stmt->bind_param("is", $service_id, $appointment_date);
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST[
     if ($cnt > 0) {
         $error_message = "Эта дата и время уже заняты. Пожалуйста, выберите другое время.";
     } else {
-        // Добавляем запись в базу данных
+        
         $sql = "INSERT INTO service_bookings (user_id, service_id, appointment_date) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iis", $user_id, $service_id, $appointment_date);
@@ -46,11 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST[
     }
 }
 
-// Получаем категории сервисов
 $categories_sql = "SELECT id, name FROM service_categories";
 $categories_result = $conn->query($categories_sql);
 
-// Закрываем соединение
+
 $conn->close();
 ?>
 
@@ -59,13 +58,12 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет</title>
+    <title>личный кабинет</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/favicon.svg" type="image/x-icon">
 </head>
 <body>
 <header class="header_page">
-    <a href="client_dashboard.php" class="header_page-first_href">Главная</a>
     <img src="img/logo_header.png" alt="Logo">
     <a href="logout.php" class="header_page-second_href">Выйти</a>
 </header>
@@ -111,7 +109,6 @@ $conn->close();
 </div>
 
 <script>
-    // Загрузка услуг для выбранной категории
     function loadServices(categoryId) {
         if (categoryId) {
             fetch(`get_services.php?category_id=${categoryId}`)
@@ -122,7 +119,7 @@ $conn->close();
                     data.forEach(service => {
                         servicesSelect.innerHTML += `<option value="${service.id}" data-description="${service.description}" data-price="${service.price}">${service.name}</option>`;
                     });
-                    document.getElementById('services_block').style.display = 'block';
+                    document.getElementById('services_block').style.display = 'grid';
                 })
                 .catch(error => console.error('Ошибка загрузки услуг:', error));
         } else {
@@ -131,7 +128,7 @@ $conn->close();
         }
     }
 
-    // Загрузка деталей выбранной услуги и занятых дат
+    
     function loadServiceDetails() {
         let selectedOption = document.getElementById('services').selectedOptions[0];
         if (selectedOption.value !== "") {
@@ -145,25 +142,24 @@ $conn->close();
             document.getElementById('service_price').textContent = 'Цена: ' + servicePrice + ' руб.';
             document.getElementById('service_id').value = serviceId;
 
-            // Показываем детали услуги
-            document.getElementById('service_details').style.display = 'block';
+            
+            document.getElementById('service_details').style.display = 'flex';
 
-            // Загружаем занятые даты для выбранной услуги
             fetch(`get_booked_dates.php?service_id=${serviceId}`)
                 .then(response => response.json())
                 .then(bookedDates => {
                     let datetimeInput = document.querySelector('input[name="appointment_date"]');
-                    datetimeInput.value = ''; // Сбросить текущее значение
+                    datetimeInput.value = ''; 
 
-                    // Ограничиваем выбор занятых дат
+                    
                     datetimeInput.addEventListener('input', function () {
                         let selectedDate = new Date(this.value);
                         let isDateBooked = bookedDates.some(date => new Date(date).getTime() === selectedDate.getTime());
 
-                        // Если дата занята, сбрасываем выбор
+                        
                         if (isDateBooked) {
                             alert('Эта дата и время уже заняты. Выберите другое время.');
-                            this.value = ''; // Сбросить выбор
+                            this.value = ''; 
                         }
                     });
                 })

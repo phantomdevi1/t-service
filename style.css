@@ -402,14 +402,28 @@ body{
     width: 50%;
     color: #fff;
     border-radius: 10px;
-    display: grid;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
 }
 .title_service_block{
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 30px;
 }
-.services_block{
-    display: grid;
+#category,
+#services{
+    width: 50%;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+#services_block{
+    width: 100%;
+}
+#service_details{
     margin-top: 30px;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
 }
