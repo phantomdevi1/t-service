@@ -41,6 +41,27 @@
             </div>
         </div>
 
+        <div class="our_temmates_block">
+            <p class="title_info_block">наша команда</p>
+            <div class="temmate_info-block">
+                <div class="temmate_info">
+                    <p class="temmate_info-title">главный механник</p>
+                    <img src="img/mechanik.svg" alt="">
+                    <p class="temmate_info-content">Орлова Марья Валерьевна</p>
+                </div>
+                <div class="temmate_info">
+                    <p class="temmate_info-title">директор</p>
+                    <img src="img/director.svg" alt="">
+                    <p class="temmate_info-content">Фомина Валерия Владимировна</p>
+                </div>
+                <div class="temmate_info">
+                    <p class="temmate_info-title">менеджер</p>
+                    <img src="img/manager.svg" alt="">
+                    <p class="temmate_info-content">Савёлова Анна Андреевна</p>
+                </div>
+            </div>
+        </div>
+
     <form action="submit_callback.php" method="POST" class="form_backcall">
         <p>остались вопросы?</p>
         <input class="backcall_input" type="number" name="number_phone" placeholder="номер телефона" required>
@@ -50,5 +71,10 @@
     </form>
 
     </div>
+
+    <footer>
+        <img src="img/logo_white.svg" alt="">
+        <p>всегда выбирайте лучшее</p>
+    </footer>
 </body>
 </html>
