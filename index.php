@@ -19,6 +19,24 @@
     <hr class="header_index_hr">
 </div>
     <div class="index_content">
+        <div class="slider">
+             <div class="slides">
+            <!-- Слайды изображений -->
+                <div class="slide">
+                    <img src="img/slider1.jpg" alt="Слайд 1">
+                </div>
+                <div class="slide">
+                    <img src="img/slider2.jpg" alt="Слайд 2">
+                </div>
+                <div class="slide">
+                    <img src="img/slider3.jpg" alt="Слайд 3">
+                </div>
+             </div>
+    <!-- Кнопки навигации -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
         <div class="slogan-block">
             <p>Т-Service — экспертный ремонт вашего TANK, на который можно положиться!</p>
         </div>
@@ -76,5 +94,24 @@
         <img src="img/logo_white.svg" alt="">
         <p>всегда выбирайте лучшее</p>
     </footer>
+    <script>
+    let slideIndex = 0;
+    showSlides();
+
+    function plusSlides(n) {
+        slideIndex += n;
+        showSlides();
+    }
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        if (slideIndex >= slides.length) { slideIndex = 0; }
+        if (slideIndex < 0) { slideIndex = slides.length - 1; }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex].style.display = "block";
+    }
+</script>
 </body>
 </html>
