@@ -12,7 +12,10 @@
         <a href="news.php">новости</a>        
         <img src="img/logo_index.png" alt="">
         <a href="auth.php">авторизация</a>
-    </header>    
+    </header> 
+    <script src="button_up.js"></script>
+    <button id="scrollToTopBtn" onclick="scrollToTop()">&#8593;</button>
+ 
     <div class="index_content">
         <div class="slider">
              <div class="slides">
@@ -88,23 +91,28 @@
         <p>всегда выбирайте лучшее</p>
     </footer>
     <script>
-    let slideIndex = 0;
-    showSlides();
-
-    function plusSlides(n) {
-        slideIndex += n;
+       let slideIndex = 0;
         showSlides();
-    }
 
-    function showSlides() {
-        let slides = document.getElementsByClassName("slide");
-        if (slideIndex >= slides.length) { slideIndex = 0; }
-        if (slideIndex < 0) { slideIndex = slides.length - 1; }
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+        setInterval(function() {
+            plusSlides(1);
+        }, 6000);
+
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides();
         }
-        slides[slideIndex].style.display = "block";
-    }
-</script>
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+        }
+
+    </script>
 </body>
 </html>

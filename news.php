@@ -16,7 +16,9 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/favicon.svg" type="image/x-icon">
 </head>
-<body>
+<body>    
+    <script src="button_up.js"></script>
+    <button id="scrollToTopBtn" onclick="scrollToTop()">&#8593;</button>
     <header class="header_page">
         <a href="index.php" class="header_page-first_href">главная</a>
         <img src="img/logo_header.png" alt="">
