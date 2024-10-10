@@ -8,16 +8,11 @@
     <link rel="shortcut icon" href="img/favicon.svg" type="image/x-icon">
 </head>
 <body>
-    <div class="header_logo_index">
-        <img src="img/logo_index.png" alt="">
-    </div>
-    <div class="header_index-block">
     <header class="header_index">
-        <a href="news.php">новости</a>
+        <a href="news.php">новости</a>        
+        <img src="img/logo_index.png" alt="">
         <a href="auth.php">авторизация</a>
     </header>    
-    <hr class="header_index_hr">
-</div>
     <div class="index_content">
         <div class="slider">
              <div class="slides">
@@ -45,13 +40,11 @@
                 <img class="slogan_img" src="img/first_img.png" alt="">
                 <p class="slogan_text">Фиксированная стоимость обслуживания вне зависимости от внешних факторов</p>
             </div>
-            <hr class="advantages-block_hr">
 
             <div class="second_slogan-block">
                 <p class="slogan_text">Своевременное качественное ТО Вашего автомобиля в соответствии со стандартами</p>
                 <img class="slogan_img" src="img/second_img.png" alt="">
             </div>
-            <hr class="advantages-block_hr">
 
             <div class="third_slogan-block">
                 <img class="slogan_img" src="img/third_img.png" alt="">
