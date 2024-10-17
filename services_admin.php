@@ -40,9 +40,9 @@ $conn->close();
 </head>
 <body>
 <header class="header_page">
-    <a href="admin_dashboard.php" class="header_page-first_href">Главная</a>
+    <a href="admin_dashboard.php" class="header_page-first_href">главная</a>
     <img src="img/logo_header.png" alt="Логотип">
-    <a href="logout.php" class="header_page-second_href">Выйти</a>
+    <a href="logout.php" class="header_page-second_href">выйти</a>
 </header>
 
 <div class="content">

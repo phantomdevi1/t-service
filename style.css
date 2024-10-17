@@ -446,7 +446,7 @@ footer p{
 
 /* admin_dashboard */
 .admin_panel_block{
-    width: 70%;
+    width: 80%;
     margin-top: 250px;
     display: flex;
 }
@@ -562,4 +562,72 @@ footer p{
     flex-direction: column;
     gap: 10px;
     font-size: 20px;
+}
+
+
+/* delete news */
+.delete_news_btn {
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;       
+    font-family: inter;
+    background-color: #848A77;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: 0.5s;
+}
+    
+.delete_news_btn:hover {
+    color: #dfffdf;
+    background-color: red;
+}
+
+
+
+/* adaptiv */
+@media screen and (width < 1800px) {
+    .cart_admin_panel{
+        width: 300px;
+        height: 300px;
+    }
+}
+
+
+
+@media screen and (width < 1700px) {
+    .first_slogan-block,
+    .second_slogan-block,
+    .third_slogan-block
+    {
+       height: auto; 
+    }
+        
+    .slogan_img{
+        width: 40%;
+        height: auto;
+    }
+}
+
+@media screen and (width < 1510px) {
+    .admin_panel_block{
+        width: 100%;
+    }
+    .order_service_block{
+        width: 70%;
+    }
+}
+
+@media screen and (width < 1450px) {
+    .news_block{
+        width: 80%;
+    }
+    .auth_block{
+        width: 60%;
+    }
+    .call_requests_table {
+        width: 80%;
+    }
 }
