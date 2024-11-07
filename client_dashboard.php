@@ -126,6 +126,7 @@ $conn->close();
                 <option value="19:00">19:00</option>
             </select>
 
+
             <input type="hidden" id="service_id" name="service_id">
             <button type="submit">Записаться</button>
         </form>
@@ -157,44 +158,52 @@ $conn->close();
 
     
     function loadServiceDetails() {
-        let selectedOption = document.getElementById('services').selectedOptions[0];
-        if (selectedOption.value !== "") {
-            let serviceId = selectedOption.value;
-            let serviceName = selectedOption.textContent;
-            let serviceDescription = selectedOption.getAttribute('data-description');
-            let servicePrice = selectedOption.getAttribute('data-price');
+    let selectedOption = document.getElementById('services').selectedOptions[0];
+    if (selectedOption.value !== "") {
+        let serviceId = selectedOption.value;
+        let serviceName = selectedOption.textContent;
+        let serviceDescription = selectedOption.getAttribute('data-description');
+        let servicePrice = selectedOption.getAttribute('data-price');
 
-            document.getElementById('service_name').textContent = serviceName;
-            document.getElementById('service_description').textContent = serviceDescription;
-            document.getElementById('service_price').textContent = 'Цена: ' + servicePrice + ' руб.';
-            document.getElementById('service_id').value = serviceId;
+        document.getElementById('service_name').textContent = serviceName;
+        document.getElementById('service_description').textContent = serviceDescription;
+        document.getElementById('service_price').textContent = 'Цена: ' + servicePrice + ' руб.';
+        document.getElementById('service_id').value = serviceId;
+        document.getElementById('service_details').style.display = 'flex';
 
-            
-            document.getElementById('service_details').style.display = 'flex';
+        // Сброс времени, если дата или услуга изменена
+        document.querySelector('select[name="appointment_time"]').value = "";
 
-            fetch(`get_booked_dates.php?service_id=${serviceId}`)
-                .then(response => response.json())
-                .then(bookedDates => {
-                    let datetimeInput = document.querySelector('input[name="appointment_date"]');
-                    datetimeInput.value = ''; 
+        // Добавляем обработчик для поля даты
+        document.querySelector('input[name="appointment_date"]').addEventListener('change', function () {
+            let appointmentDate = this.value;
+            if (appointmentDate) {
+                // Запрос занятых временных слотов для выбранной даты и услуги
+                fetch(`get_booked_dates.php?service_id=${serviceId}&appointment_date=${appointmentDate}`)
+                    .then(response => response.json())
+                    .then(bookedTimes => {
+                        let timeSelect = document.querySelector('select[name="appointment_time"]');
+                        timeSelect.querySelectorAll('option').forEach(option => {
+                            // Делаем все опции активными перед применением новых данных
+                            option.disabled = false;
+                        });
 
-                    
-                    datetimeInput.addEventListener('input', function () {
-                        let selectedDate = new Date(this.value);
-                        let isDateBooked = bookedDates.some(date => new Date(date).getTime() === selectedDate.getTime());
-
-                        
-                        if (isDateBooked) {
-                            alert('Эта дата и время уже заняты. Выберите другое время.');
-                            this.value = ''; 
-                        }
-                    });
-                })
-                .catch(error => console.error('Ошибка загрузки занятых дат:', error));
-        } else {
-            document.getElementById('service_details').style.display = 'none';
-        }
+                        // Делаем занятые временные слоты некликабельными
+                        bookedTimes.forEach(bookedTime => {
+                            let timeOption = timeSelect.querySelector(`option[value="${bookedTime.slice(0,5)}"]`);
+                            if (timeOption) {
+                                timeOption.disabled = true;
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Ошибка загрузки занятых временных слотов:', error));
+            }
+        });
+    } else {
+        document.getElementById('service_details').style.display = 'none';
     }
+    }
+
 
     document.querySelector('form').addEventListener('submit', function(e) {
     let dateInput = document.querySelector('input[name="appointment_date"]').value;
