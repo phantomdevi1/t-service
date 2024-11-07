@@ -14,37 +14,50 @@ $success_message = '';
 $error_message = '';
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST['appointment_date'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['service_id'], $_POST['appointment_date'], $_POST['appointment_time'])) {
     $user_id = $_SESSION['user_id'];
     $service_id = intval($_POST['service_id']);
     $appointment_date = $_POST['appointment_date'];
+    $appointment_time = $_POST['appointment_time'];
 
-    
-    $check_sql = "SELECT COUNT(*) AS cnt FROM service_bookings WHERE service_id = ? AND appointment_date = ?";
-    $stmt = $conn->prepare($check_sql);
-    $stmt->bind_param("is", $service_id, $appointment_date);
-    $stmt->execute();
-    $stmt->bind_result($cnt);
-    $stmt->fetch();
-    $stmt->close();
+    // Объединяем дату и время
+    $appointment_datetime = $appointment_date . ' ' . $appointment_time . ':00';
+    $appointment_datetime_object = new DateTime($appointment_datetime);
+    $current_datetime = new DateTime();
 
-    if ($cnt > 0) {
-        $error_message = "Эта дата и время уже заняты. Пожалуйста, выберите другое время.";
+    // Проверяем, что выбранное время в будущем
+    if ($appointment_datetime_object <= $current_datetime) {
+        $error_message = "Вы не можете выбрать прошедшую дату и время. Пожалуйста, выберите будущую дату и время.";
     } else {
-        
-        $sql = "INSERT INTO service_bookings (user_id, service_id, appointment_date) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iis", $user_id, $service_id, $appointment_date);
-
-        if ($stmt->execute()) {
-            $success_message = "Вы успешно записались на услугу!";
-        } else {
-            $error_message = "Ошибка при записи: " . $conn->error;
-        }
-
+        // Проверка занятости выбранного времени
+        $check_sql = "SELECT COUNT(*) AS cnt FROM service_bookings WHERE service_id = ? AND appointment_date = ?";
+        $stmt = $conn->prepare($check_sql);
+        $stmt->bind_param("is", $service_id, $appointment_datetime);
+        $stmt->execute();
+        $stmt->bind_result($cnt);
+        $stmt->fetch();
         $stmt->close();
+
+        if ($cnt > 0) {
+            $error_message = "Эта дата и время уже заняты. Пожалуйста, выберите другое время.";
+        } else {
+            // Вставка записи
+            $sql = "INSERT INTO service_bookings (user_id, service_id, appointment_date) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("iis", $user_id, $service_id, $appointment_datetime);
+
+            if ($stmt->execute()) {
+                $success_message = "Вы успешно записались на услугу!";
+            } else {
+                $error_message = "Ошибка при записи: " . $conn->error;
+            }
+
+            $stmt->close();
+        }
     }
 }
+
+
 
 $categories_sql = "SELECT id, name FROM service_categories";
 $categories_result = $conn->query($categories_sql);
@@ -99,11 +112,25 @@ $conn->close();
         <p id="service_price"></p>
 
         <form method="POST" action="">
-            <label for="appointment_date">Выберите дату и время:</label>
-            <input type="datetime-local" name="appointment_date" required>
+            <label for="appointment_date">Выберите дату:</label>
+            <input type="date" name="appointment_date" required>
+
+            <label for="appointment_time">Выберите время:</label>
+            <select name="appointment_time" required>
+                <option value="">Выберите время</option>
+                <option value="09:00">9:00</option>
+                <option value="11:00">11:00</option>
+                <option value="13:00">13:00</option>
+                <option value="15:00">15:00</option>
+                <option value="17:00">17:00</option>
+                <option value="19:00">19:00</option>
+            </select>
+
             <input type="hidden" id="service_id" name="service_id">
             <button type="submit">Записаться</button>
         </form>
+
+
     </div>
 </div>
 </div>
@@ -168,6 +195,28 @@ $conn->close();
             document.getElementById('service_details').style.display = 'none';
         }
     }
+
+    document.querySelector('form').addEventListener('submit', function(e) {
+    let dateInput = document.querySelector('input[name="appointment_date"]').value;
+    let timeSelect = document.querySelector('select[name="appointment_time"]').value;
+
+    if (!dateInput || !timeSelect) {
+        alert('Пожалуйста, выберите дату и время для записи.');
+        e.preventDefault();
+        return;
+    }
+
+    // Проверка, что выбранное время в будущем
+    let selectedDateTime = new Date(`${dateInput}T${timeSelect}`);
+    let currentDateTime = new Date();
+
+    if (selectedDateTime <= currentDateTime) {
+        alert('Вы не можете выбрать прошедшую дату и время. Пожалуйста, выберите будущую дату и время.');
+        e.preventDefault();
+    }
+    });
+
+
 </script>
 
 </body>
