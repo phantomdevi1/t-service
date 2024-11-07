@@ -78,7 +78,7 @@ $conn->close();
 <body>
 <header class="header_page">
     <img src="img/logo_header.png" alt="Logo">
-    <a href="logout.php" class="header_page-second_href">Выйти</a>
+    <a href="logout.php" class="header_page-second_href">выйти</a>
 </header>
 
 <div class="content">
