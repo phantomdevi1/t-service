@@ -18,12 +18,9 @@
  
     <div class="index_content">
     <div class="video-container">
-        <iframe src="https://vk.com/video_ext.php?oid=-222651806&id=456239040&hd=4&autoplay=1&loop=1&controls=0" 
-                width="100%" height="100%" 
-                allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                frameborder="0" allowfullscreen>
-        </iframe>
+        <video src="video/index_video.mp4" autoplay loop muted playsinline width="100%" height="100%"></video>
     </div>
+
 
 
         <div class="slogan-block">
