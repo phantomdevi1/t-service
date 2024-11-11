@@ -17,23 +17,14 @@
     <button id="scrollToTopBtn" onclick="scrollToTop()">&#8593;</button>
  
     <div class="index_content">
-        <div class="slider">
-             <div class="slides">
-            <!-- Слайды изображений -->
-                <div class="slide">
-                    <img src="img/slider1.jpg" alt="Слайд 1">
-                </div>
-                <div class="slide">
-                    <img src="img/slider2.jpg" alt="Слайд 2">
-                </div>
-                <div class="slide">
-                    <img src="img/slider3.jpg" alt="Слайд 3">
-                </div>
-             </div>
-    <!-- Кнопки навигации -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <div class="video-container">
+        <iframe src="https://vk.com/video_ext.php?oid=-222651806&id=456239040&hd=4&autoplay=1&loop=1&controls=0" 
+                width="100%" height="100%" 
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+                frameborder="0" allowfullscreen>
+        </iframe>
     </div>
+
 
         <div class="slogan-block">
             <p>Т-Service — экспертный ремонт вашего TANK, на который можно положиться!</p>
@@ -90,29 +81,6 @@
         <img src="img/logo_white.svg" alt="">
         <p>всегда выбирайте лучшее</p>
     </footer>
-    <script>
-       let slideIndex = 0;
-        showSlides();
 
-        setInterval(function() {
-            plusSlides(1);
-        }, 6000);
-
-        function plusSlides(n) {
-            slideIndex += n;
-            showSlides();
-        }
-
-        function showSlides() {
-            let slides = document.getElementsByClassName("slide");
-            if (slideIndex >= slides.length) { slideIndex = 0; }
-            if (slideIndex < 0) { slideIndex = slides.length - 1; }
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex].style.display = "block";
-        }
-
-    </script>
 </body>
 </html>
